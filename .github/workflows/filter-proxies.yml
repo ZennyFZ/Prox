@@ -26,7 +26,18 @@ jobs:
       - name: Install aiohttp
         run: python -m pip install --disable-pip-version-check aiohttp
       - name: Generate proxy results
-        run: python filter_proxies.py --out good_proxies.txt
+        env:
+          RAW: ${{ secrets.PROXY_RAW }}
+          TARGET: ${{ secrets.PROXY_TARGET }}
+          SOURCES: ${{ secrets.PROXY_SOURCES }}
+        run: |
+          for name in RAW TARGET SOURCES; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing GitHub Actions secret PROXY_${name}"
+              exit 1
+            fi
+          done
+          python filter_proxies.py --out good_proxies.txt
       - name: Commit and push results when changed
         run: |
           git add -- good_proxies.txt

@@ -38,7 +38,9 @@ load_env(Path(__file__).with_name(".env"))
 def required_setting(name):
     value = os.environ.get(name)
     if value is None:
-        raise RuntimeError(f"Missing required .env setting: {name}")
+        raise RuntimeError(
+            f"Missing required setting: {name}. Set it in .env or the environment."
+        )
     return value
 
 
