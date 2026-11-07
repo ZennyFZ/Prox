@@ -40,7 +40,7 @@ jobs:
           python filter_proxies.py --out good_proxies.txt
       - name: Commit and push results when changed
         run: |
-          git add -- good_proxies.txt
+          git add -f -- good_proxies.txt
           if git diff --cached --quiet -- good_proxies.txt; then
             echo "No result changes; nothing to push."
             exit 0
