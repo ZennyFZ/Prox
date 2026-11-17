@@ -1,0 +1,9 @@
+[Unit]
+Description=Run prox-refresh at 07:00, 15:00 and 23:00 (Asia/Ho_Chi_Minh)
+
+[Timer]
+OnCalendar=*-*-* 07,15,23:00:00 Asia/Ho_Chi_Minh
+Persistent=true
+
+[Install]
+WantedBy=timers.target

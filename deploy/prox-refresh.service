@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh proxy list and push results to GitHub
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=hainghia
+WorkingDirectory=/home/hainghia/apps/prox
+ExecStart=/home/hainghia/apps/prox/deploy/run_and_push.sh
+TimeoutStartSec=2h
+Nice=10
